@@ -5,6 +5,8 @@ This is a Watch os for KSAC xWtch Series, compatible with TTGO T display
 NTP updae time
 minigame
 
-3.3 added
+3.6 added Super quality fonts
+
+Next :bluetooth and wifi scanne mode and display
 
           
