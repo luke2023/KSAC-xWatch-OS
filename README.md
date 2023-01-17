@@ -7,7 +7,9 @@ NTP updae time
 minigame
 
 3.6 added Super quality fonts
+
 3.6.1 fixed a bit bug
+
 3.6.2 fixed serious watchdog bugs
 
 Next :bluetooth and wifi scanne mode and display
