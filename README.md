@@ -11,6 +11,7 @@ minigame
 3.6.1 fixed a bit bug
 
 3.6.2 fixed serious watchdog bugs
+ 3.6.3 fixed refresh time issue
 
 Next :bluetooth and wifi scanne mode and display
 
