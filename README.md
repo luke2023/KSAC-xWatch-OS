@@ -15,8 +15,8 @@ Video:https://www.youtube.com/watch?v=fl0i-7D50IU&list=PLeCGN3LanYKb3hhCKjzyZ8n3
 Development in progress:
   xwatch os 4.0
     with vivid functions and apps
-    
     Whole new GUI interface and architecture
+    
 
 Next :bluetooth and wifi scanne mode and display
 
