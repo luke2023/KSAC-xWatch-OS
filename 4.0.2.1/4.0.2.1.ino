@@ -96,7 +96,7 @@ void loop() {
   //     Serial.println(activeTime);
 
 }
-void refresh() {
+void refresh() {//contral gui
   if (touch == 0) {
     switch (app) {
       case 0 :
@@ -127,7 +127,7 @@ void refresh() {
   else {
   }
 }
-void thread() {
+void thread() {////control variables and sensors
   if (rightB == 0 || leftB == 0) {
     activeTime = millis();
   }
@@ -184,31 +184,23 @@ void printCursor(){///////app and cursor, may have many pages
               icon.pushImage(67 - 32, 120 - 32, clockIcon);
               icon.pushImage(67 - 32, 196 - 32, settingsIcon);
             }
-        // switch(cursor){
-          case 0:
-            
-
-            
-            icon.pushSprite(x - 32, y - 32, TFT_BLACK);
-          break;
-        }
               break;
             }
-            
+            icon.pushSprite(&bgp,0,0, TFT_BLACK);
 }
 void printApp(){
   switch (cursor){
     case 0:
-
+    icon.pushImage(67 - 32, 196 - 32, cursorIcon);
     break;
      case 1:
-
+    icon.pushImage(67 - 32, 196 - 32, cursorIcon);
     break;
      case 2:
-
+icon.pushImage(67 - 32, 196 - 32, cursorIcon);
     break;
      case 3:
-
+icon.pushImage(67 - 32, 196 - 32, cursorIcon);
     break;
 
 }
