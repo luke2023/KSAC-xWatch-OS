@@ -515,7 +515,7 @@ void toNtp( void * pvParameters ) {
     Serial.println(xPortGetCoreID());
   while (1) {
    
-    if (rtc.getEpoch() - lastepoc > 3600000 && failed == 0) {
+    if (rtc.getEpoch() - lastepoc > 3600 && failed == 0) {
       int contime = millis();
       WiFi.begin(ssid, wifipw);
       Serial.println("Connecting Wifi");
