@@ -2,9 +2,7 @@
 This is a Watch os for KSAC xWtch Series, compatible with TTGO T display
 Video:https://www.youtube.com/watch?v=fl0i-7D50IU&list=PLeCGN3LanYKb3hhCKjzyZ8n3_8gjJ4b0E
 
-3.2 added 
-NTP updae time
-minigame
+3.2 added NTP updae time minigame
 
 3.6 added Super quality fonts
 
@@ -13,6 +11,12 @@ minigame
 3.6.2 fixed serious watchdog bugs
 
 3.6.3 fixed refresh time issue
+
+Development in progress:
+  xwatch os 4.0
+    with vivid functions and apps
+    
+    Whole new GUI interface and architecture
 
 Next :bluetooth and wifi scanne mode and display
 
