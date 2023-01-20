@@ -64,7 +64,7 @@ void setup() {
   bgp.createSprite(135,240);
   icon.createSprite(64, 64);
   clockNum.createSprite(64, 64);
-  bgm.setSwapBytes(true);
+  bgp.setSwapBytes(true);
   icon.setSwapBytes(true);
   clockNum.setSwapBytes(true);
   bgp.pushImage(0, 0,  135, 240, bootlogo);
@@ -112,7 +112,7 @@ void refresh() {
         //Serial.print(rightB);
         /////////set up
         if (oldApp != app) {
-          bgm.pushImage(0, 0,  135, 240, bootlogo);
+          bgp.pushImage(0, 0,  135, 240, bootlogo);
           printCursor();
           printApp();
           oldApp = app;
@@ -122,7 +122,7 @@ void refresh() {
         }
         break;
     }
-
+   bgp.pushSprite(0,0); 
   }
   else {
   }
@@ -180,9 +180,10 @@ void printCursor(){///////app and cursor, may have many pages
           if (oldCursor!= cursor||oldApp!=app){
             switch (app){
               case 1:
-icon.pushImage(67 - 32, 44 - 32, gameIcon);
-            icon.pushImage(67 - 32, 120 - 32, clockIcon);
-            icon.pushImage(67 - 32, 196 - 32, settingsIcon);
+              icon.pushImage(67 - 32, 44 - 32, gameIcon);
+              icon.pushImage(67 - 32, 120 - 32, clockIcon);
+              icon.pushImage(67 - 32, 196 - 32, settingsIcon);
+            }
         // switch(cursor){
           case 0:
             
@@ -198,7 +199,7 @@ icon.pushImage(67 - 32, 44 - 32, gameIcon);
 void printApp(){
   switch (cursor){
     case 0:
-        
+
     break;
      case 1:
 
