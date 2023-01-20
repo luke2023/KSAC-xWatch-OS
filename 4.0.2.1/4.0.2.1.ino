@@ -6,7 +6,7 @@
 #include "FreeSans50pt7b.h"
 
 
-int app,cursor, foor, touch, oldMin, newMin, leftB, rightB, activeTime, oldApp, aniOldXaniNewX;
+int app,oldcursor,cursor, foor, touch, oldMin, newMin, leftB, rightB, activeTime, oldApp, aniOldXaniNewX;
 /*foor is in app
    app
    0 main
@@ -110,21 +110,16 @@ void refresh() {
         break;
       case 1 :
         //Serial.print(rightB);
+        /////////set up
         if (oldApp != app) {
-          tft.pushImage(0, 0,  135, 240, bootlogo);
+          bgm.pushImage(0, 0,  135, 240, bootlogo);
+          printCursor();
+          printApp();
           oldApp = app;
         }
-        // switch(cursor){
-          case 0:
-            icon.d(0,0,180,26,3,TFT_WHITE);
-            printSprite(67, 44, gameIcon);
-            printSprite(67, 120, clockIcon);
-            printSprite(67, 196, settingsIcon);
-            icon.pushImage(0, 0, 64, 64, i);
-            icon.pushSprite(x - 32, y - 32, TFT_BLACK);
-          break;
+        //////loop 
+
         }
-        
         break;
     }
 
@@ -160,7 +155,7 @@ void thread() {
 }
 
 void printClock(){
-oldMin = rtc.getMinute();
+  oldMin = rtc.getMinute();
   oldMin = newMin;
   clockNum.setFreeFont(FreeSans50pt7b);
   //tft.setCursor(20, 50);
@@ -180,4 +175,39 @@ oldMin = rtc.getMinute();
    clockNum.drawString(String(rtc.getHour(true)).20,130);
   }
   clockNum.pushToSprite(&bgp, 0, 0, TFT_BLACK);
+}
+void printCursor(){///////app and cursor, may have many pages
+          if (oldCursor!= cursor||oldApp!=app){
+            switch (app){
+              case 1:
+icon.pushImage(67 - 32, 44 - 32, gameIcon);
+            icon.pushImage(67 - 32, 120 - 32, clockIcon);
+            icon.pushImage(67 - 32, 196 - 32, settingsIcon);
+        // switch(cursor){
+          case 0:
+            
+
+            
+            icon.pushSprite(x - 32, y - 32, TFT_BLACK);
+          break;
+        }
+              break;
+            }
+            
+}
+void printApp(){
+  switch (cursor){
+    case 0:
+        
+    break;
+     case 1:
+
+    break;
+     case 2:
+
+    break;
+     case 3:
+
+    break;
+
 }
