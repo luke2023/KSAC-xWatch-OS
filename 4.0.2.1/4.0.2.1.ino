@@ -3,7 +3,7 @@
 #include <ESP32Time.h>
 #include "icons.h"
 #include "Main_Back_pic.h"
-#include "FreeSans80pt7b.h"
+#include "FreeSans50pt7b.h"
 
 int app,cursor, foor, touch, oldMin, newMin, leftB, rightB, activeTime, oldApp, aniOldXaniNewX;
 /*foor is in app
@@ -37,15 +37,17 @@ TFT_eSPI tft = TFT_eSPI();
 TFT_eSprite icon = TFT_eSprite(&tft);
 TFT_eSprite clockNum = TFT_eSprite(&tft);
 TFT_eSprite cursor= TFT_eSprite(&tft);
+TFT_eSprite bgp = TFT_eSprite(&tft);//back ground picture
 ESP32Time rtc(3600);
 int x = 40;
-void printSprite(int x, int y , const unsigned short i[]) {
-  icon.pushImage(0, 0, 64, 64, i);
-  icon.pushSprite(x - 32, y - 32, TFT_BLACK);
-}
+//void printSprite(int x, int y , const unsigned short i[]) {
+ // icon.pushImage(0, 0, 64, 64, i);
+ // icon.pushSprite(x - 32, y - 32, TFT_BLACK);
+//}
 void setup() {
   Serial.begin(115200);
-
+  pinMode(0, INPUT);
+  pinMode(35, INPUT);
   Serial.print(leftB);
   Serial.print(rightB);
   Serial.print("app");
@@ -58,46 +60,21 @@ void setup() {
   tft.init();
   tft.setRotation(0);
   tft.setSwapBytes(1);
-  tft.pushImage(0, 0,  135, 240, bootlogo);
+  bgp.createSprite(135,240);
   icon.createSprite(64, 64);
   clockNum.createSprite(64, 64);
+  bgm.setSwapBytes(true);
   icon.setSwapBytes(true);
+  clockNum.setSwapBytes(true);
+  bgp.pushImage(0, 0,  135, 240, bootlogo);
+ 
+  
   //  printSprite(67, 44, gameIcon);
   //  printSprite(67, 120, clockIcon);
   //  printSprite(67, 196, settingsIcon);
-  pinMode(0, INPUT);
-  pinMode(35, INPUT);
-  oldMin = rtc.getMinute();
-  oldMin = newMin;
-  Serial.print("ok1");
-
-  tft.loadFont(smooth);
-  clockNum.setFreeFont(FreeSans80pt7b);
-  Serial.print("okf");
-  tft.pushImage(0, 0,  135, 240, bootlogo);
-  Serial.print("ok2");
-  tft.setCursor(20, 50);
-  tft.setTextColor( TFT_WHITE);
-  tft.setTextSize(100);
-  //tft.println(String(rtc.getHour(true)));
-  if (rtc.getHour(true) < 10) {
-
-    tft.println("0" + String(rtc.getHour(true)));
-
-  } else {
-    tft.println(String(rtc.getHour(true)));
-  }
-  //delay(2000);
-  tft.setCursor(20, 130);
-  //tft.setTextSize(4);
-  if (rtc.getMinute() < 10) {
-    tft.println("0" + String(rtc.getMinute()));
-  }
-  else {
-    tft.println(String(rtc.getMinute()));
-  }
-  Serial.print("ok2");
-
+  
+  printClock();
+   bgp.pushSprite(0,0,TFT_BLACK);
 }
 
 void loop() {
@@ -197,4 +174,27 @@ void thread() {
     tft.writecommand(ST7789_SLPIN);// Sleep the display driver
     esp_deep_sleep_start();
   }
+}
+
+void printClock(){
+oldMin = rtc.getMinute();
+  oldMin = newMin;
+  clockNum.setFreeFont(FreeSans50pt7b);
+  //tft.setCursor(20, 50);
+   
+  clockNum.setTextColor( TFT_WHITE);
+  //tft.println(String(rtc.getHour(true)));
+  if (rtc.getHour(true) < 10) {
+  clockNum.drawString("0"+String(rtc.getHour(true)),20,50);
+  } else {
+   clockNum.drawString(String(rtc.getHour(true)).20,50);
+  }
+  //tft.setCursor(20, 130);
+  //tft.setTextSize(4);
+   if (rtc.getMinute(true) < 10) {
+  clockNum.drawString("0"+String(rtc.getHour(true)),20,130);
+  } else {
+   clockNum.drawString(String(rtc.getHour(true)).20,130);
+  }
+  clockNum.pushToSprite(&bgp, 0, 0, TFT_BLACK);
 }
