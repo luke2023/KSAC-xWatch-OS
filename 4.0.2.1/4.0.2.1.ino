@@ -5,6 +5,7 @@
 #include "Main_Back_pic.h"
 #include "FreeSans50pt7b.h"
 
+
 int app,cursor, foor, touch, oldMin, newMin, leftB, rightB, activeTime, oldApp, aniOldXaniNewX;
 /*foor is in app
    app
@@ -113,12 +114,14 @@ void refresh() {
           tft.pushImage(0, 0,  135, 240, bootlogo);
           oldApp = app;
         }
-        switch(cursor){
+        // switch(cursor){
           case 0:
-          icon.drawRoundRect(0,0,180,26,3,TFT_WHITE);
-          printSprite(67, 44, gameIcon);
-        printSprite(67, 120, clockIcon);
-        printSprite(67, 196, settingsIcon);
+            icon.d(0,0,180,26,3,TFT_WHITE);
+            printSprite(67, 44, gameIcon);
+            printSprite(67, 120, clockIcon);
+            printSprite(67, 196, settingsIcon);
+            icon.pushImage(0, 0, 64, 64, i);
+            icon.pushSprite(x - 32, y - 32, TFT_BLACK);
           break;
         }
         
