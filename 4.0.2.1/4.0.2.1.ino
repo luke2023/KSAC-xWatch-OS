@@ -74,7 +74,7 @@ void setup() {
   //  printSprite(67, 196, settingsIcon);
   
   printClock();
-   bgp.pushSprite(0,0,TFT_BLACK);
+   bgp.pushSprite(0,0);
 }
 
 void loop() {
@@ -101,28 +101,8 @@ void refresh() {
       case 0 :
         newMin = rtc.getMinute();
         if (oldMin != newMin || oldApp != app) {
-          tft.loadFont(smooth);
-          tft.pushImage(0, 0,  135, 240, bootlogo);
-          tft.setCursor(20, 50);
-          tft.setTextColor( TFT_WHITE);
-          tft.setTextSize(100);
-          //tft.println(String(rtc.getHour(true)));
-          if (rtc.getHour(true) < 10) {
-
-            tft.println("0" + String(rtc.getHour(true)));
-
-          } else {
-            tft.println(String(rtc.getHour(true)));
-          }
-          //delay(2000);
-          tft.setCursor(20, 130);
-          //tft.setTextSize(4);
-          if (rtc.getMinute() < 10) {
-            tft.println("0" + String(rtc.getMinute()));
-          }
-          else {
-            tft.println(String(rtc.getMinute()));
-          }
+          tprintClock();
+          bgp.pushSprite(0,0);
           oldMin = newMin;
           oldApp = app;
         }
