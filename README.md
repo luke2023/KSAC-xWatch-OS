@@ -16,4 +16,6 @@ minigame
 
 Next :bluetooth and wifi scanne mode and display
 
+https://github.com/G6EJD/ESP32-ESP8266-File-Download-Upload-Delete-Stream-and-Directory/blob/master/ESP_File_Download_Upload_Dir_Stream_V04_SPIFFS.ino
+
           
