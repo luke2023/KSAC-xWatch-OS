@@ -18,4 +18,6 @@ Next :bluetooth and wifi scanne mode and display
 
 https://github.com/G6EJD/ESP32-ESP8266-File-Download-Upload-Delete-Stream-and-Directory/blob/master/ESP_File_Download_Upload_Dir_Stream_V04_SPIFFS.ino
 
+https://www.google.com.tw/url?sa=t&rct=j&q=&esrc=s&source=video&cd=&ved=2ahUKEwj4kZuQzNX8AhXKA4gKHQG1AUQQtwJ6BAgBEAI&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D1OkEXeRbq_M&usg=AOvVaw0CBYl0JbnJ4AaRs_EWFJK9
+
           
