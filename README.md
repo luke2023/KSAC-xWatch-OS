@@ -16,8 +16,10 @@ Development in progress:
   xwatch os 4.0
     with vivid functions and apps
     Whole new GUI interface and architecture
+    whole new 75 fps display and animation by moving sprites around.
+    Put spirits out side the screen and put it in again when touched
     
-
+    the will be xwatch os lite(non touch) and standard and complex versions (littlevga lvga)
 Next :bluetooth and wifi scanne mode and display
 
 https://github.com/G6EJD/ESP32-ESP8266-File-Download-Upload-Delete-Stream-and-Directory/blob/master/ESP_File_Download_Upload_Dir_Stream_V04_SPIFFS.ino
