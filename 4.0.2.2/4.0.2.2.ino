@@ -260,7 +260,7 @@ void buttonRefresh() {
         Serial.println("triple");
         leftB = 3;
         break;
-      case long_click:
+      
     }
   }
 }
