@@ -217,7 +217,7 @@ void printApp() {
       icon.pushImage(iconX, iconY2, iconX + 64, iconY2 + 64, settingsIcon);
       break;
   }
-  icon.pushSprite(&bgp, 0, 0, TFT_BLACK);
+  icon.pushToSprite(&bgp, 0, 0, TFT_BLACK);
 }
 void buttonRefresh() {
   if (buttonA.isPressed() == 1) {
