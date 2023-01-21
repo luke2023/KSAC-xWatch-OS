@@ -122,7 +122,7 @@ void refresh() {  //contral gui
         /////////set up
         if (oldApp != app || oldCursor != cursor) {
           bgp.pushImage(0, 0, 135, 240, bootlogo);
-          printCursor();
+          //printCursor();
           printApp();
           icon.pushToSprite(&bgp, 0, 0, TFT_BLACK);
           oldApp = app;
@@ -154,7 +154,7 @@ void thread() {  ////control variables and sensors
           case 1:
             switchCursor(0);
             break;
-          case 2:
+          case 4:
             switchApp(0);
             break;
         }
@@ -166,7 +166,7 @@ void thread() {  ////control variables and sensors
             switchCursor(1);
             
             break;
-          case 2:
+          case 4:
             switchApp(1);
             break;
         }
@@ -219,7 +219,7 @@ void printCursor() {  ///////app and cursor, may have many pages
 void printApp() {
   icon.fillSprite(TFT_BLACK);
   switch (cursor) {
-    case 1:
+    case 0:
       icon.pushImage(iconX, iconY, iconX + 64, iconY + 64, gameIcon);
       icon.pushImage(iconX, iconY1, iconX + 64, iconY1 + 64, clockIcon);
       icon.pushImage(iconX, iconY2, iconX + 64, iconY2 + 64, settingsIcon);
@@ -267,9 +267,7 @@ void buttonRefresh() {
       case single_click:
         Serial.println("single");
         rightB = 1;
-          while(1){
-    Serial.println("singleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-  }
+          
     
         break;
       case double_click:
