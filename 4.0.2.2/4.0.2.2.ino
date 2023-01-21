@@ -95,19 +95,19 @@ void setup() {
 void loop() {
   buttonA.loop();
   buttonB.loop();
-  thread();   /////sensor
+  thread();  /////sensor
   printClock();
-   refresh();  ////gui and check old app
+  refresh();  ////gui and check old app
 
-   Serial.print(leftB);
-   Serial.print(rightB);
-    Serial.print("app");
-     Serial.print(app);
-     Serial.print("n");
-     Serial.print(newMin);
-         Serial.print("op");
-     Serial.print(oldMin);
-      Serial.println(activeTime);
+  Serial.print(leftB);
+  Serial.print(rightB);
+  Serial.print("app");
+  Serial.print(app);
+  Serial.print("n");
+  Serial.print(newMin);
+  Serial.print("op");
+  Serial.print(oldMin);
+  Serial.println(activeTime);
 }
 void refresh() {  //contral gui
   if (touch == 0) {
@@ -239,7 +239,7 @@ void buttonRefresh() {
     pressTimeA = millis();
   }
   if (buttonB.isPressed() == 1) {
-    if (millis() - pressTimeB > 1000 {
+    if (millis() - pressTimeB > 1000) {
       pressTimeB = millis();
       rightB = 4;
     }
@@ -264,7 +264,7 @@ void buttonRefresh() {
         break;
     }
   }
-    if (buttonB.wasPressed()) {
+  if (buttonB.wasPressed()) {
     switch (buttonB.read()) {
       case single_click:
         Serial.println("single");
