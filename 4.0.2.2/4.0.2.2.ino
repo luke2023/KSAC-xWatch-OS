@@ -93,14 +93,14 @@ void setup() {
 }
 
 void loop() {
-   buttonA.loop();
+  buttonA.loop();
   buttonB.loop();
   thread();   /////sensor
   printClock();
    refresh();  ////gui and check old app
 
-   Serial.print(buttonA.isPressed());
-   Serial.print(buttonB.isPressed());
+   Serial.print(leftB);
+   Serial.print(rightB);
     Serial.print("app");
      Serial.print(app);
      Serial.print("n");
@@ -239,7 +239,7 @@ void buttonRefresh() {
     pressTimeA = millis();
   }
   if (buttonB.isPressed() == 1) {
-    if (millis() - pressTimeB > 1000) {
+    if (millis() - pressTimeB > 1000 {
       pressTimeB = millis();
       rightB = 4;
     }
@@ -261,6 +261,22 @@ void buttonRefresh() {
       case triple_click:
         Serial.println("triple");
         leftB = 3;
+        break;
+    }
+  }
+    if (buttonB.wasPressed()) {
+    switch (buttonB.read()) {
+      case single_click:
+        Serial.println("single");
+        rightB = 1;
+        break;
+      case double_click:
+        Serial.println("double");
+        rightB = 2;
+        break;
+      case triple_click:
+        Serial.println("triple");
+        rightB = 3;
         break;
     }
   }
@@ -288,7 +304,7 @@ void switchCursor(bool n) {
   }
 }
 void checkSleep() {
-  if (millis() - activeTime > 8000) {
+  if (millis() - activeTime > 100000) {
     digitalWrite(4, LOW);              // Should force backlight off
     tft.writecommand(ST7789_DISPOFF);  // Switch off the display
     tft.writecommand(ST7789_SLPIN);    // Sleep the display driver
