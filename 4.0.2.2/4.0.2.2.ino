@@ -194,16 +194,16 @@ void printCursor() {  ///////app and cursor, may have many pages
 
   switch (cursor) {
     case 0:
-      icon.pushImage(iconX - 4, iconY - 4, 67 - 32, iconX - 4 + 72, iconY - 4 + 72, cursorIcon);
+      icon.pushImage(iconX - 4, iconY - 4, iconX - 4 + 72, iconY - 4 + 72, cursorIcon);
       break;
     case 1:
-      icon.pushImage(iconX - 4, iconY1 - 4, 67 - 32, iconX - 4 + 72, iconY1 - 4 + 72, cursorIcon);
+      icon.pushImage(iconX - 4, iconY1 - 4, iconX - 4 + 72, iconY1 - 4 + 72, cursorIcon);
       break;
     case 2:
-      icon.pushImage(iconX - 4, iconY2 - 4, 67 - 32, iconX - 4 + 72, iconY2 - 4 + 72, cursorIcon);
+      icon.pushImage(iconX - 4, iconY2 - 4,  iconX - 4 + 72, iconY2 - 4 + 72, cursorIcon);
       break;
     case 3:
-      icon.pushImage(iconX - 4, iconY2 - 4, 67 - 32, iconX - 4 + 72, iconY2 - 4 + 72, cursorIcon);
+      icon.pushImage(iconX - 4, iconY2 - 4, iconX - 4 + 72, iconY2 - 4 + 72, cursorIcon);
       break;
   }
   icon.pushToSprite(&bgp, 0, 0, TFT_BLACK);
