@@ -14,4 +14,7 @@ minigame
 
 Next :bluetooth and wifi scanne mode and display
 
+4444
+remember ro delete sprite to release ram!!!!!!!!!!!!!!!!!
+
           
