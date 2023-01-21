@@ -93,6 +93,8 @@ void setup() {
 }
 
 void loop() {
+   buttonA.loop();
+  buttonB.loop();
   thread();   /////sensor
   printClock();
    refresh();  ////gui and check old app
