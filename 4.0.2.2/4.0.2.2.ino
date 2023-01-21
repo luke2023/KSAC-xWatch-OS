@@ -61,6 +61,8 @@ void setup() {
   Serial.begin(115200);
   pinMode(0, INPUT);
   pinMode(35, INPUT);
+  buttonA.begin(BUTTON_A_PIN);
+  buttonB.begin(BUTTON_B_PIN);
   Serial.print(leftB);
   Serial.print(rightB);
   Serial.print("app");
@@ -75,7 +77,7 @@ void setup() {
   tft.setSwapBytes(1);
   bgp.createSprite(135, 240);
   icon.createSprite(64, 64);
-  clockNum.createSprite(64, 64);
+  clockNum.createSprite(135, 240);
   bgp.setSwapBytes(true);
   icon.setSwapBytes(true);
   clockNum.setSwapBytes(true);
@@ -92,18 +94,18 @@ void setup() {
 
 void loop() {
   thread();   /////sensor
-  refresh();  ////gui and check old app
+  printClock();
+   refresh();  ////gui and check old app
 
-  // Serial.print(rightB);
-  //  Serial.print(leftB);
-  //  Serial.print(rightB);
-  //   Serial.print("app");
-  //    Serial.print(app);
-  //    Serial.print("n");
-  //    Serial.print(newMin);
-  //        Serial.print("op");
-  //    Serial.print(oldMin);
-  //     Serial.println(activeTime);
+   Serial.print(buttonA.isPressed());
+   Serial.print(buttonB.isPressed());
+    Serial.print("app");
+     Serial.print(app);
+     Serial.print("n");
+     Serial.print(newMin);
+         Serial.print("op");
+     Serial.print(oldMin);
+      Serial.println(activeTime);
 }
 void refresh() {  //contral gui
   if (touch == 0) {
@@ -148,21 +150,27 @@ void thread() {  ////control variables and sensors
       }
       break;
     case 1:  ///app1 menu
-      switch (leftB) {
-        case 1:
-          switchCursor(0);
-          break;
-        case 2:
-          switchApp(0);
-          break;
+      if (leftB != 0) {
+        switch (leftB) {
+          case 1:
+            switchCursor(0);
+            break;
+          case 2:
+            switchApp(0);
+            break;
+        }
+        leftB = 0;
       }
-      switch (rightB) {
-        case 1:
-          switchCursor(1);
-          break;
-        case 2:
-          switchApp(1);
-          break;
+      if (rightB != 0) {
+        switch (rightB) {
+          case 1:
+            switchCursor(1);
+            break;
+          case 2:
+            switchApp(1);
+            break;
+        }
+        rightB = 0;
       }
   }
 }
@@ -200,7 +208,7 @@ void printCursor() {  ///////app and cursor, may have many pages
       icon.pushImage(iconX - 4, iconY1 - 4, iconX - 4 + 72, iconY1 - 4 + 72, cursorIcon);
       break;
     case 2:
-      icon.pushImage(iconX - 4, iconY2 - 4,  iconX - 4 + 72, iconY2 - 4 + 72, cursorIcon);
+      icon.pushImage(iconX - 4, iconY2 - 4, iconX - 4 + 72, iconY2 - 4 + 72, cursorIcon);
       break;
     case 3:
       icon.pushImage(iconX - 4, iconY2 - 4, iconX - 4 + 72, iconY2 - 4 + 72, cursorIcon);
@@ -221,22 +229,14 @@ void printApp() {
 }
 void buttonRefresh() {
   if (buttonA.isPressed() == 1) {
-    //if (first) {
-    //    first = 0;
-    // } else {
     if (millis() - pressTimeA > 1000) {
       pressTimeA = millis();
       leftB = 4;
     }
-    // }
   } else {
-    //first=1;
     pressTimeA = millis();
   }
   if (buttonB.isPressed() == 1) {
-    //if (first) {
-    //    first = 0;
-    // } else {
     if (millis() - pressTimeB > 1000) {
       pressTimeB = millis();
       rightB = 4;
@@ -260,7 +260,6 @@ void buttonRefresh() {
         Serial.println("triple");
         leftB = 3;
         break;
-      
     }
   }
 }
