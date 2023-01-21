@@ -115,6 +115,7 @@ void refresh() {//contral gui
           bgp.pushImage(0, 0,  135, 240, bootlogo);
           printCursor();
           printApp();
+          
           oldApp = app;
         }
         //////loop 
@@ -177,6 +178,7 @@ void printClock(){
   clockNum.pushToSprite(&bgp, 0, 0, TFT_BLACK);
 }
 void printCursor(){///////app and cursor, may have many pages
+          icon.fillSprite(TFT_BLACK);
           if (oldCursor!= cursor||oldApp!=app){
             switch (app){
               case 1:
@@ -187,17 +189,18 @@ void printCursor(){///////app and cursor, may have many pages
               break;
             }
             icon.pushSprite(&bgp,0,0, TFT_BLACK);
+            
 }
 void printApp(){
   switch (cursor){
     case 0:
-    icon.pushImage(67 - 32, 196 - 32, cursorIcon);
+    icon.pushImage(67 - 32, 42 - 32, cursorIcon);
     break;
      case 1:
-    icon.pushImage(67 - 32, 196 - 32, cursorIcon);
+    icon.pushImage(67 - 32, 82 - 32, cursorIcon);
     break;
      case 2:
-icon.pushImage(67 - 32, 196 - 32, cursorIcon);
+icon.pushImage(67 - 32, 120 - 32, cursorIcon);
     break;
      case 3:
 icon.pushImage(67 - 32, 196 - 32, cursorIcon);
