@@ -105,7 +105,7 @@ void loop() {
   Serial.println(app);
 }
 void refresh() {  //contral gui
-  icon.setSwapBytes(true);
+  
   if (touch == 0) {
     switch (app) {
       case 0:
@@ -119,10 +119,11 @@ void refresh() {  //contral gui
         }
         break;
       case 1:
-      icon.createSprite(135, 120);
+      icon.createSprite(135, 240);
+      icon.setSwapBytes(true);
         //Serial.print(rightB);
         /////////set up
-        //if (oldApp != app || oldCursor != cursor) {
+        if (oldApp != app || oldCursor != cursor) {
         bgp.pushImage(0, 0, 135, 240, bootlogo);
         //printCursor();
         printApp();
@@ -130,7 +131,7 @@ void refresh() {  //contral gui
         oldApp = app;
         bgp.pushSprite(0, 0);
         icon.deleteSprite();
-        //}
+        }
         //////loop
         break;
     }
