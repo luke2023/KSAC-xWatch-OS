@@ -102,12 +102,8 @@ void loop() {
   Serial.print(leftB);
   Serial.print(rightB);
   Serial.print("app");
-  Serial.print(app);
-  Serial.print("n");
-  Serial.print(newMin);
-  Serial.print("op");
-  Serial.print(oldMin);
-  Serial.println(activeTime);
+  Serial.println(app);
+  
 }
 void refresh() {  //contral gui
   if (touch == 0) {
@@ -149,6 +145,7 @@ void thread() {  ////control variables and sensors
       if (rightB == 1) {
         Serial.print(rightB);
         switchApp(1);
+        
       }
       break;
     case 1:  ///app1 menu
@@ -161,18 +158,19 @@ void thread() {  ////control variables and sensors
             switchApp(0);
             break;
         }
-        leftB = 0;
+       
       }
       if (rightB != 0) {
         switch (rightB) {
           case 1:
             switchCursor(1);
+            
             break;
           case 2:
             switchApp(1);
             break;
         }
-        rightB = 0;
+       
       }
   }
 }
@@ -249,7 +247,7 @@ void buttonRefresh() {
     pressTimeB = millis();
   }
   if (buttonA.wasPressed()) {
-    switch (buttonA.read()) {
+  switch (buttonA.read()) {
       case single_click:
         Serial.println("single");
         leftB = 1;
@@ -269,6 +267,10 @@ void buttonRefresh() {
       case single_click:
         Serial.println("single");
         rightB = 1;
+          while(1){
+    Serial.println("singleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+  }
+    
         break;
       case double_click:
         Serial.println("double");
@@ -291,6 +293,8 @@ void switchApp(bool n) {
       app--;
     }
   }
+  rightB=0;
+  leftB=0;
 }  //1=++
 void switchCursor(bool n) {
   if (n) {
@@ -302,6 +306,8 @@ void switchCursor(bool n) {
       cursor--;
     }
   }
+    rightB=0;
+  leftB=0;
 }
 void checkSleep() {
   if (millis() - activeTime > 100000) {
