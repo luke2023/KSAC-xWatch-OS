@@ -76,12 +76,9 @@ void setup() {
   tft.setRotation(0);
   tft.setSwapBytes(1);
   bgp.createSprite(135, 240);
-  icon.createSprite(135, 120);  ///////////////////////////////
-  clockNum.createSprite(135, 240);
   bgp.setSwapBytes(true);
   icon.setSwapBytes(true);
-  clockNum.setSwapBytes(true);
-  bgp.pushImage(0, 0, 135, 240, bootlogo);
+
 
 
   //  printSprite(67, 44, gameIcon);
@@ -90,48 +87,59 @@ void setup() {
 
   printClock();
   bgp.pushSprite(0, 0);
+  bgp.deleteSprite();
 }
 
 void loop() {
   buttonA.loop();
   buttonB.loop();
-  thread();  /////sensor
-  printClock();
+  thread();   /////sensor
   refresh();  ////gui and check old app
 
-  Serial.print(leftB);
-  Serial.print(rightB);
-  Serial.print("app");
-  Serial.println(app);
+  // Serial.print(leftB);
+  // Serial.print(rightB);
+  // Serial.print("app");
+  // Serial.println(app);
 }
 void refresh() {  //contral gui
-  
+
   if (touch == 0) {
     switch (app) {
       case 0:
-        bgp.pushImage(0, 0, 135, 240, bootlogo);
+        //bgp.pushImage(0, 0, 135, 240, bootlogo);
         newMin = rtc.getMinute();
         if (oldMin != newMin || oldApp != app) {
-          printClock();
-          bgp.pushSprite(0, 0);
-          oldMin = newMin;
-          oldApp = app;
-        }
+        bgp.createSprite(135, 240);
+        bgp.setSwapBytes(true);
+        printClock();
+        bgp.deleteSprite();
+        oldMin = newMin;
+        oldApp = app;
+        Serial.print(leftB);
+        Serial.print(rightB);
+        Serial.print("app");
+        Serial.println(app);
+        delay(3);
+         }
         break;
       case 1:
-      icon.createSprite(135, 240);
-      icon.setSwapBytes(true);
-        //Serial.print(rightB);
-        /////////set up
-        if (oldApp != app || oldCursor != cursor) {
-        bgp.pushImage(0, 0, 135, 240, bootlogo);
-        //printCursor();
-        printApp();
-        icon.pushToSprite(&bgp, 0, 0, TFT_BLACK);
-        oldApp = app;
-        bgp.pushSprite(0, 0);
-        icon.deleteSprite();
-        }
+         icon.createSprite(135, 240);
+         icon.setSwapBytes(true);
+         bgp.createSprite(135, 240);
+         bgp.setSwapBytes(true);
+        // //Serial.print(rightB);
+        // /////////set up
+         if (oldApp != app || oldCursor != cursor) {
+           bgp.pushImage(0, 0, 135, 240, bootlogo);
+        //   //printCursor();
+           printApp();
+           icon.pushToSprite(&bgp, 0, 0, TFT_BLACK);
+           oldApp = app;
+           bgp.pushSprite(0, 0);
+           icon.deleteSprite();
+           bgp.deleteSprite();
+        delay(3);
+      }
         //////loop
         break;
     }
@@ -147,7 +155,6 @@ void thread() {  ////control variables and sensors
   switch (app) {
     case 0:
       if (rightB == 1) {
-        Serial.print(rightB);
         switchApp(1);
       }
       break;
@@ -176,6 +183,9 @@ void thread() {  ////control variables and sensors
   }
 }
 void printClock() {
+  bgp.pushImage(0, 0, 135, 240, bootlogo);
+  clockNum.createSprite(135, 240);
+  // clockNum.setSwapBytes(true);
   oldMin = rtc.getMinute();
   oldMin = newMin;
   clockNum.setFreeFont(&FreeSans50pt7b);
@@ -196,6 +206,8 @@ void printClock() {
     clockNum.drawString(String(rtc.getMinute()), 20, 130);
   }
   clockNum.pushToSprite(&bgp, 0, 0, TFT_BLACK);
+  bgp.pushSprite(0, 0);
+  clockNum.deleteSprite();
 }
 void printCursor() {  ///////app and cursor, may have many pages
 
