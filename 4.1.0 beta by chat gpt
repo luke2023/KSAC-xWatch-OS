@@ -1,0 +1,111 @@
+#include <TFT_eSPI.h>
+
+TFT_eSPI tft = TFT_eSPI(); // 建立 TFT_eSPI 物件
+
+const int SCREEN_WIDTH = 240; // 螢幕寬度
+const int SCREEN_HEIGHT = 240; // 螢幕高度
+const int NUM_SCREENS = 3; // 畫面數量
+
+// 創建 sprite，將大小設為螢幕大小，用於顯示畫面
+TFT_eSprite screen = TFT_eSprite(&tft);
+screen.createSprite(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+int current_screen = 0; // 當前顯示的畫面
+int start_x = 0; // 拖曳開始的 x 座標
+int x_offset = 0; // 畫面的水平偏移量
+
+void setup() {
+  tft.init(); // 初始化 TFT_eSPI 物件
+  tft.setRotation(1); // 設定螢幕方向
+
+  drawScreen1(); // 畫面 1
+  drawScreen2(); // 畫面 2
+  drawScreen3(); // 畫面 3
+}
+
+void loop() {
+  getTouch(); // 取得觸控輸入
+}
+
+void getTouch() {
+  static int last_x = -1; // 上一次的 x 座標
+  static bool is_dragging = false; // 是否正在拖曳
+
+  int x, y;
+  bool is_touched = tft.getTouch(&x, &y);
+  
+  if (is_touched && !is_dragging) {
+    // 手指按下時，記錄起始座標
+    start_x = x;
+    is_dragging = true;
+  } else if (!is_touched && is_dragging) {
+    // 手指放開時，計算移動距離，更新顯示區域
+    int dx = x - start_x;
+    if (dx > SCREEN_WIDTH / 4) {
+      current_screen = (current_screen + 1) % NUM_SCREENS;
+      x_offset = 0;
+    } else if (dx < -SCREEN_WIDTH / 4) {
+      current_screen = (current_screen - 1 + NUM_SCREENS) % NUM_SCREENS;
+      x_offset = 0;
+    }
+    is_dragging = false;
+    last_x = -1;
+  } else if (is_dragging && x != last_x) {
+    // 手指移動時，計算移動距離，更新顯示區域
+    int dx = x - start_x;
+    x_offset = dx;
+    if (current_screen == 0 && x_offset > 0) {
+      x_offset = 0;
+    } else if (current_screen == NUM_SCREENS - 1 && x_offset < 0) {
+      x_offset = 0;
+    }
+    drawScreen(current_screen, x_offset);
+    last_x = x;
+  }
+}
+
+void drawScreen(int screen_index, int x_offset) {
+  // 將 sprite 移動到正確的位置
+  screen.setPos(x_offset, 0);
+
+  // 清空 sprite 的畫面
+  screen.fillSprite(TFT_BLACK);
+  switch (screen_index) {
+case 0:
+drawScreen1();
+break;
+case 1:
+drawScreen2();
+break;
+case 2:
+drawScreen3();
+break;
+default:
+break;
+}
+
+// 將 sprite 的畫面顯示在螢幕上
+screen.pushSprite(0, 0);
+}
+
+void drawScreen1() {
+// 畫面 1 的內容
+}
+
+void drawScreen2() {
+// 畫面 2 的內容
+}
+
+void drawScreen3() {
+// 畫面 3 的內容
+}
+/*
+
+這個版本的程式碼在 `drawScreen()` 函數中判斷當前顯示的畫面，然後呼叫相應的繪製函數，例如 `drawScreen1()`、`drawScreen2()` 等等。
+
+當手指移動時， `getTouch()` 函數會計算手指移動的距離，並更新 `x_offset` 變數，然後呼叫 `drawScreen()` 函數以顯示畫面。這裡使用 `setPos()` 函數將 sprite 移動到正確的位置，然後再繪製畫面並顯示在螢幕上。
+
+使用 sprite 可以使程式碼更簡潔，並且可以輕鬆實現手指移動時畫面跟著移動的效果。
+
+*/
+// by chat gpt and linche
