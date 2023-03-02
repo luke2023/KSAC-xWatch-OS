@@ -61,6 +61,48 @@ void getTouch() {
     }
     drawScreen(current_screen, x_offset);
     last_x = x;
+    
+    
+    void loop() {
+  // 等待手指觸碰螢幕
+  while (!getTouch()) {}
+
+  // 記錄手指的初始位置和時間
+  int start_x = x;
+  unsigned long start_time = millis();
+
+  // 等待手指離開螢幕
+  while (getTouch()) {}
+
+  // 計算手指移動的距離和時間
+  int delta_x = x - start_x;
+  unsigned long delta_t = millis() - start_time;
+
+  // 計算手指滑動的速度
+  float speed = abs(delta_x) / (float) delta_t * 1000;
+
+  // 如果手指滑動的距離大於閾值，或者手指滑動的速度大於閾值，或者手指滑動的時間大於閾值，則進行畫面切換
+  if (abs(delta_x) > 50 || speed > 100 || delta_t > 200) {
+    // 計算下一個要顯示的畫面索引
+    int next_screen_index = current_screen_index;
+    if (delta_x < 0) {
+      next_screen_index++;
+      if (next_screen_index >= NUM_SCREENS) {
+        next_screen_index = 0;
+      }
+    } else {
+      next_screen_index--;
+      if (next_screen_index < 0) {
+        next_screen_index = NUM_SCREENS - 1;
+      }
+    }
+
+    // 切換畫面
+    current_screen_index = next_screen_index;
+    drawScreen();
+  }
+}
+
   }
 }
 
@@ -107,5 +149,20 @@ void drawScreen3() {
 
 使用 sprite 可以使程式碼更簡潔，並且可以輕鬆實現手指移動時畫面跟著移動的效果。
 
+v1.1
+你是對的，如果僅根據手指移動距離來決定是否進行畫面切換，可能會漏掉一些快速滑動的情況。因此，我們可以考慮加入一些額外的條件來進行判斷，例如：
+
+計算手指滑動的速度，如果速度超過一個閾值，例如 100 像素/秒，則認為是快速滑動，可以進行畫面切換。
+計算手指滑動的時間，如果時間超過一個閾值，例如 200 毫秒，則認為是長時間滑動，可以進行畫面切換。
+這些額外的條件可以提高判斷的準確度，使得畫面切換更加靈敏和順暢。以下是一個示範程式碼，用於判斷是否要切換畫面（包括上述兩個條件）：
+
+在這個示範程式碼中，我們根據手指移動距離、手指滑動速度和手指滑動時間三個條件來判斷是否進行畫面切換。如果
+其中，閾值可以根據需要進行調整，以適應不同的應用場景。比如，如果希望手指滑動距離更長才進行畫面切換，可以增加閾值；如果希望手指滑動速度更快才進行畫面切換，可以減小閾值。
+
+需要注意的是，這種判斷方式可能會導致一些問題，比如：
+
+手指滑動距離較短但速度較快的情況，可能會被誤判為快速滑動。
+手指滑動距離較長但速度較慢的情況，可能會被誤判為長時間滑動。
+因此，你需要根據具體情況來調整閾值，以達到最佳的判斷效果。另外，還可以根據實際情況進行進一步優化，比如增加手指滑動方向的判斷等，以提高畫面切換的精確度和順暢度。
 */
 // by chat gpt and linche
